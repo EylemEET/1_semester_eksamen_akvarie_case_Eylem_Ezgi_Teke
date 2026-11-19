@@ -1,0 +1,201 @@
+/**
+* fil: style.css
+**/
+/* farvepalette */
+:root {
+    --lyseblaa:             #c2def2;
+    --daempet_blaa_groen:   #409cb9;
+    --red:                  #ff0000;
+    --sort_mat:             #282828;
+    --knækket_hvid:         #f5f5f5;
+    --daempet_gul:          #f5e6b3;
+}
+/* CSS-animation af Jitter-kassen */
+/* Baggrundbillede oprettet ud fra vektor i Figma*/
+html,
+body {
+    margin: 0px;
+    height: 100vh;
+    background-image: url("../billeder/baggrund/akvarie_bg20.svg");
+    background-size: 100% 120%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--sort_mat);
+    overflow: hidden; /*skjuler alt der går udenfor skærmen*/
+}
+/*Copilot og tidlig opgave*/
+.fisk_antias {
+    width: 110px;
+    position: absolute;
+    top: 70%;
+    left: 0px;
+    animation: svoem_venstre 30s linear infinite;
+}
+.fisk_fie {
+    width: 110px;
+    position: absolute;
+    top: 75%;
+    left: 0px;
+    animation: svoem_hoejre 35s linear infinite;
+}
+.fisk_frode {
+    width: 180px;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    animation: svoem_hoejre 30s linear infinite;
+}
+.fisk_kara {
+    width: 350px;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    animation: svoem_hoejre 20s linear infinite;
+}
+.fisk_kirurg {
+    width: 100px;
+    position: absolute;
+    top: 20%;
+    left: 30;
+    animation: 
+    svoem_venstre 40s linear infinite;
+}
+.fisk_raevefjaes {
+    width: 150px;
+    position: absolute;
+    top: 20%;
+    left: 0px;
+    animation: svoem_hoejre 30s linear infinite;
+}
+.fisk_karl{
+    width: 150px;
+    position: absolute;
+    top: 75%;
+    left: 0px;
+    animation: svoem_venstre 60s linear infinite;
+    z-index: 1;
+}
+.fisk_bob{
+    width: 80px;
+    position: absolute;
+    top: 40%;
+    right: 80px;
+}
+.fisk_ari{
+    width: 80px;
+    position: absolute;
+    top: 15%;
+    left: 0px;
+    animation: svoem_venstre 35s linear infinite;
+}
+/*mekanismen der får fiske til at svømme hen over skærmen
+from: betyder at fisken starter x-vw view-port til venstre, så den starter udenfor skærmen
+to: betyder at fisken starter x-vw view-port til højre , så den svømmer helt ud af sækrmen på højre side
+vw= view-prt-width (bredde) 1vw=1% af skærmens bredde
+*/
+@keyframes svoem_hoejre {
+    from {transform: translateX(-10vw);
+    }
+    to {transform: translateX(1800px);
+    }
+}
+@keyframes svoem_venstre {
+    from {transform: translateX(100vw);
+    }
+    to {transform: translateX(-0vw);
+    }
+}
+/* Knappe funktioner */
+button {
+    padding: 5px 20px;
+    font-size: 1.25rem;
+    background: transparent;
+    border: 2px solid var(--daempet_blaa_groen);
+    border-radius: 10px;
+    color: var(--knækket_hvid);
+    cursor: pointer;
+    backdrop-filter: blur(1px);
+}
+button:hover {
+    transform: translateY(-1px); /*flytter elementet 1 pixel op ad vertikalt i forhold til dens absolute placering på skærmen*/
+}
+button:hover {
+    box-shadow: 0 0 8px var(--lyseblaa);
+}
+.title { /*.title fordi at definere at den kun styler elementer der har class="titel"*/
+    font-weight: 70;
+    font-family: 'lato', sans-serif;    font-size: 2.5rem;
+    color: var(--knækket_hvid);
+    letter-spacing: 2px;
+}
+.knapper {
+    position:fixed;
+    top: 86%;
+    left: 1%;
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    margin-top: -5px; /* justér tallet */
+}
+/*Oprettelse af popup-vindue/dialogbuks med attributter: Sparring med Copilot og https://www.w3schools.com/jsref/event_onclick.asp*/
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.popup {
+    font-family: 'lato', sans-serif;
+    color: var(--sort_mat);
+    font-size: 1rem;
+    background-color: var(--knækket_hvid);
+    width: 400px;
+    padding: 20px;
+    border: 10px solid var(--daempet_blaa_groen);    z-index: 2;
+    border-radius: 100px;
+    text-align: center;
+}
+.fisk_antias,
+.fisk_fie,
+.fisk_frode,
+.fisk_kara,
+.fisk_kirurg,
+.fisk_raevefjaes {
+    position: absolute;
+    z-index: 1;
+}
+.infoBoks {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--knækket_hvid);
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    z-index: 3;
+}
+#luk {
+    cursor: pointer;
+    float: right;  
+}
+#akvarium {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+#closeBtn {
+    position: block;
+    margin: 10px auto 0;
+    color: var(--mat_sort);
+    font-size: 2rem;
+    border: 2px solid var(--daempet_blaa_groen);
+    border-radius: 10px;
+    background-color: var(--daempet_gul);
+    cursor: pointer;
+}
